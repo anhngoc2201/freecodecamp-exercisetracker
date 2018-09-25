@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 let autoIncrement = require('mongoose-auto-increment');
-let shortenUrlSchema = new mongoose.Schema({
- originalUrl: String
+let userSchema = new mongoose.Schema({
+ username: String
 })
-shortenUrlSchema.plugin(autoIncrement.plugin, 'Book');
-module.exports = mongoose.model('shortenUrl', shortenUrlSchema)
+userSchema.plugin(autoIncrement.plugin, 'Book');
+module.exports = mongoose.model('user', userSchema)
