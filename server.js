@@ -81,6 +81,7 @@ app.post('/api/exercise/new-user', function(request, response) {
 });
 
 app.post('/api/exercise/add', function(request, response) {
+  console.log(request.body.userId);
     userModel.findOne({
             _id: request.body.userId // search query
         }).then(doc => {
@@ -96,14 +97,15 @@ app.post('/api/exercise/add', function(request, response) {
                     "user": doc
                 });
             }).catch(err => {
+                console.log(err);
                 response.send({
-                    "error": err
+                    "error save exercise": err
                 });
             });
         })
         .catch(err => {
             response.send({
-                "error": err
+                "error find userid": err
             });
         });
 
