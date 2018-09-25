@@ -3,5 +3,5 @@ let autoIncrement = require('mongoose-auto-increment');
 let userSchema = new mongoose.Schema({
  username: String
 })
-userSchema.plugin(autoIncrement.plugin, 'Book');
+userSchema.plugin(autoIncrement.plugin, 'user');
 module.exports = mongoose.model('user', userSchema)
