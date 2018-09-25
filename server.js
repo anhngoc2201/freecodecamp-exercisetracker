@@ -62,10 +62,10 @@ app.post('/api/exercise/new-user', function(request, response) {
         user.save()
             .then(doc => {
                 console.log(doc)
-               /** response.send({
-                    "user": doc
-                });
-                **/
+                /** response.send({
+                     "user": doc
+                 });
+                 **/
             })
             .catch(err => {
                 response.send({
@@ -78,26 +78,26 @@ app.post('/api/exercise/new-user', function(request, response) {
             "error": "invalid URL"
         });
     }
-  userModel.find({}, function(err, users) {
-    var userMap = {};
+    userModel.find({}, function(err, users) {
+        var userMap = {};
 
-    users.forEach(function(user) {
-      userMap[user._id] = user;
+        users.forEach(function(user) {
+            userMap[user._id] = user;
+        });
+
+        response.send(userMap);
     });
-
-    response.send(userMap);  
-  });
 });
 
 app.post('/api/exercise/add', function(request, response) {
-  
-  userModel.findOne({
-    _id: Number(request.body.userId)   // search query
-  }) .then(doc => {
-   
-    console.log(doc);
-  console.log(mongoose.Types.ObjectId.isValid(parseInt(doc.id)));
-  var exercise = new exerciseModel({
+
+    userModel.findOne({
+            _id: Number(request.body.userId) // search query
+        }).then(doc => {
+
+            console.log(doc);
+            console.log(mongoose.Types.ObjectId.isValid(parseInt(doc.id)));
+            var exercise = new exerciseModel({
                 userId: doc.id,
                 date: request.body.date,
                 description: request.body.description,
@@ -113,48 +113,49 @@ app.post('/api/exercise/add', function(request, response) {
                     "error save exercise": err
                 });
             });
-            
-    
-  })
-  .catch(err => {
-    response.send( {"error":err});
-  });
+
+
+        })
+        .catch(err => {
+            response.send({
+                "error": err
+            });
+        });
 });
 
-app.get('/api/exercise/log', function(request, response) { 
-  
-  if (request.query.userId)
-  { var cmd = {
-    userId: Number(request.query.userId)
-     
-  };
-   if (request.query.from  || request.query.to)
-   {
-     cmd.date = {};
-      if (request.query.from )
-   {
-     cmd.date.$gte = new Date(request.query.from );
-       
-     
-   }
-   
-   if (request.query.to)
-   {
-     cmd.date.$lte = new Date(request.query.to );
-   }
-   }
-  
-   
-    exerciseModel.find(cmd).limit( Number(request.query.limit) ) .then(doc => {
-   
-         response.send( doc);   
-    
-  })
-  .catch(err => {
-    response.send( {"error":err});
-  });
-  }
-  
+app.get('/api/exercise/log', function(request, response) {
+
+    if (request.query.userId) {
+        var cmd = {
+            userId: Number(request.query.userId)
+
+        };
+        if (request.query.from || request.query.to) {
+            cmd.date = {};
+            if (request.query.from) {
+                cmd.date.$gte = new Date(request.query.from);
+
+
+            }
+
+            if (request.query.to) {
+                cmd.date.$lte = new Date(request.query.to);
+            }
+        }
+
+
+        exerciseModel.find(cmd).limit(Number(request.query.limit)).then(doc => {
+
+                response.send(doc);
+
+            })
+            .catch(err => {
+                response.send({
+                    "error": err
+                });
+            });
+    }
+
 });
 
 // listen for requests :)
