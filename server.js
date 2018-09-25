@@ -124,10 +124,28 @@ app.post('/api/exercise/add', function(request, response) {
 app.get('/api/exercise/log', function(request, response) { 
   
   if (request.query.userId)
-  {
-    exerciseModel.find({
-    userId: Number(request.query.userId)   // search query
-  }).limit( request.query.limit ) .then(doc => {
+  { var cmd = {
+    userId: Number(request.query.userId)
+     
+  };
+   if (request.query.from  || request.query.to)
+   {
+     cmd.date = {};
+      if (request.query.from )
+   {
+     cmd.date.$gte = new Date(request.query.from );
+       
+     
+   }
+   
+   if (request.query.to)
+   {
+     cmd.date.$lte = new Date(request.query.to );
+   }
+   }
+  
+   
+    exerciseModel.find(cmd).limit( Number(request.query.limit) ) .then(doc => {
    
          response.send( doc);   
     
