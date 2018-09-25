@@ -121,13 +121,20 @@ app.post('/api/exercise/add', function(request, response) {
   });
 });
 
-app.get('/api/exercise/log?*', function(request, response) {
-  console.log(request.body);
-  console.log(request.param.userId);
-  console.log(request.query);
+app.get('/api/exercise/log', function(request, response) { 
+  
   if (request.query.userId)
   {
+    exerciseModel.find({
+    userId: Number(request.query.userId)   // search query
+  }).limit( request.query.limit ) .then(doc => {
+   
+         response.send( doc);   
     
+  })
+  .catch(err => {
+    response.send( {"error":err});
+  });
   }
   
 });
