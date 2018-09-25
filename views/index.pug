@@ -1,11 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form( action="/shorten_url/" method="post")
-    label Enter Url:
-    input( name="input_url" type="text" maxlength="100" placeholder="Url here" aria-labelledby="input_url")
-    button( type="submit") Submit Dream
+  <div class="row">
+    <div class="col-sm-6">
+  div(class="card text-center"  style="width: 30rem;")
+    div(class="card-header")
+      p title
+    div(class="card-body")
+      p Welcome to #{title}
+      form( action="/shorten_url/" method="post")
+        label Enter Url:
+        input( name="input_url" type="text" maxlength="100" placeholder="Url here" aria-labelledby="input_url")
+        button( type="submit" class="btn btn-primary") Submit Dream
+    div(class="card-footer text-muted")
+      p 2 days ago
   
-     
