@@ -119,10 +119,17 @@ app.post('/api/exercise/add', function(request, response) {
   .catch(err => {
     response.send( {"error":err});
   });
-  
-  
-  
+});
 
+app.get('/api/exercise/log?*', function(request, response) {
+  console.log(request.body);
+  console.log(request.param.userId);
+  console.log(request.query);
+  if (request.query.userId)
+  {
+    
+  }
+  
 });
 
 // listen for requests :)
