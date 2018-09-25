@@ -84,9 +84,9 @@ app.post('/api/exercise/add', function(request, response) {
     userModel.findOne({
             _id: request.body.userId // search query
         }).then(doc => {
-
+            console.log(request.body);
             var exercise = new exerciseModel({
-                userId: request.body.userId,
+                userId: mongoose.Types.ObjectId.fromString(request.body.userId),
                 date: request.body.date,
                 description: request.body.description,
                 duration: request.body.duration
