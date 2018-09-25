@@ -62,9 +62,10 @@ app.post('/api/exercise/new-user', function(request, response) {
         user.save()
             .then(doc => {
                 console.log(doc)
-                response.send({
+               /** response.send({
                     "user": doc
                 });
+                **/
             })
             .catch(err => {
                 response.send({
@@ -77,11 +78,36 @@ app.post('/api/exercise/new-user', function(request, response) {
             "error": "invalid URL"
         });
     }
+  userModel.find({}, function(err, users) {
+    var userMap = {};
 
+    users.forEach(function(user) {
+      userMap[user._id] = user;
+    });
+
+    response.send(userMap);  
+  });
 });
 
 app.post('/api/exercise/add', function(request, response) {
+  userModel.findOne({
+    _id: request.body.userId   // search query
+  }) .then(doc => {
+    //response.send( {"error":doc});\
+ 
+   
+    
+    console.log("test success");
+    response.redirect(301, targetUrl);
+  
+   
+  })
+  .catch(err => {
+    response.send( {"error":err});
+  });
+  
   console.log(request.body.userId);
+  console.log(mongoose.Types.ObjectId.isValid(parseInt(request.body.userId)));
   var exercise = new exerciseModel({
                 userId: request.body.userId,
                 date: request.body.date,
