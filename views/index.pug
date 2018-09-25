@@ -1,17 +1,31 @@
 extends layout
 
 block content
-  <div class="row">
-    <div class="col-sm-6">
-  div(class="card text-center"  style="width: 30rem;")
-    div(class="card-header")
-      p title
-    div(class="card-body")
-      p Welcome to #{title}
-      form( action="/shorten_url/" method="post")
-        label Enter Url:
-        input( name="input_url" type="text" maxlength="100" placeholder="Url here" aria-labelledby="input_url")
-        button( type="submit" class="btn btn-primary") Submit Dream
-    div(class="card-footer text-muted")
-      p 2 days ago
+  div(class="row justify-content-md-center")
+    div(class="col-lg-6")
+      div(class="card text-center"  style="width: 30rem;")
+        div(class="card-header")
+          p #{title}
+        div(class="card-body")
+          p Welcome to #{title}
+          form( action="/shorten_url/" method="post")
+            div(class="form-group")
+              label Enter Url:
+              input( name="input_url" type="text" maxlength="100" placeholder="Url here" aria-labelledby="input_url")
+              button( type="submit" class="btn btn-primary") Submit Dream
+        div(class="card-footer text-muted")
+          p 2 days ago
+    div(class="col-lg-6")
+      div(class="card text-center"  style="width: 30rem;")
+        div(class="card-header")
+          p #{title}
+        div(class="card-body")
+          p Welcome to #{title}
+          form( action="/shorten_url/" method="post")
+            div(class="form-group")
+              label Enter Url:
+              input( name="input_url" type="text" maxlength="100" placeholder="Url here" aria-labelledby="input_url")
+              button( type="submit" class="btn btn-primary") Submit Dream
+        div(class="card-footer text-muted")
+          p 2 days ago
   

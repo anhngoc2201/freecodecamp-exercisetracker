@@ -26,7 +26,6 @@ p {
 form {
   margin-bottom: 25px;
   padding: 15px;
-  background-color: cyan;
   display: inline-block;
   width: 100%;
   max-width: 340px;
@@ -43,22 +42,6 @@ input {
   font-size: 16px;
 }
 
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: yellow;
-}
-
-button:active {
-  box-shadow: none;
-}
 
 li {
   margin-bottom: 5px;
