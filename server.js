@@ -90,26 +90,15 @@ app.post('/api/exercise/new-user', function(request, response) {
 });
 
 app.post('/api/exercise/add', function(request, response) {
+  
   userModel.findOne({
-    _id: request.body.userId   // search query
+    _id: Number(request.body.userId)   // search query
   }) .then(doc => {
-    //response.send( {"error":doc});\
- 
    
-    
-    console.log("test success");
-    response.redirect(301, targetUrl);
-  
-   
-  })
-  .catch(err => {
-    response.send( {"error":err});
-  });
-  
-  console.log(request.body.userId);
-  console.log(mongoose.Types.ObjectId.isValid(parseInt(request.body.userId)));
+    console.log(doc);
+  console.log(mongoose.Types.ObjectId.isValid(parseInt(doc.id)));
   var exercise = new exerciseModel({
-                userId: request.body.userId,
+                userId: doc.id,
                 date: request.body.date,
                 description: request.body.description,
                 duration: request.body.duration
@@ -124,6 +113,15 @@ app.post('/api/exercise/add', function(request, response) {
                     "error save exercise": err
                 });
             });
+            
+    
+  })
+  .catch(err => {
+    response.send( {"error":err});
+  });
+  
+  
+  
 
 });
 

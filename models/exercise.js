@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let autoIncrement = require('mongoose-auto-increment');
 const Schema = mongoose.Schema;
 let exerciseSchema = new mongoose.Schema({
-  userId : { type: Schema.Types.ObjectId, ref: 'user' },
+  userId : { type: Number, ref: 'user' },
   date: {type: Date},
   duration: {type: Number},
   description: {type: String}
